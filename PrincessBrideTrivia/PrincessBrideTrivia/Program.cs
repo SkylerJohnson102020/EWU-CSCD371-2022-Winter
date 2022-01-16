@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace PrincessBrideTrivia
 {
@@ -66,11 +68,17 @@ namespace PrincessBrideTrivia
             return "Trivia.txt";
         }
 
+        public static Question[] RandomizeQuestions(Question[] questions)
+        {
+            Random random = new Random();
+            return questions.OrderBy(newQuestion => random.Next()).ToArray();
+        }
         public static Question[] LoadQuestions(string filePath)
         {
             string[] lines = File.ReadAllLines(filePath);
 
             Question[] questions = new Question[lines.Length / 5];
+            
             for (int i = 0; i < questions.Length; i++)
             {
                 int lineIndex = i * 5;
@@ -91,7 +99,9 @@ namespace PrincessBrideTrivia
                 question.CorrectAnswerIndex = correctAnswerIndex;
                 questions[i] = question;
             }
-            return questions;
+            return RandomizeQuestions(questions);
         }
+
+            
     }
 }

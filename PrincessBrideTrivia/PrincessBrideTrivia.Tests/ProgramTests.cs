@@ -26,6 +26,25 @@ namespace PrincessBrideTrivia.Tests
                 File.Delete(filePath);
             }
         }
+        [TestMethod]
+         public void LoadQuestions_GenerateQuestionsInRandomOrder_Success()
+        {
+            string filePath = Path.GetRandomFileName();
+            try
+            {
+                GenerateQuestionsFile(filePath, 2);
+
+                Question[] questions1 = Program.LoadQuestions(filePath);
+                Question[] questions2 = Program.LoadQuestions(filePath);
+
+                Assert.AreNotEqual(questions1, questions2);
+            }
+            finally
+            {
+                File.Delete(filePath);
+            }
+        }
+
 
         [TestMethod]
         [DataRow("1", true)]
@@ -73,7 +92,7 @@ namespace PrincessBrideTrivia.Tests
         }
 
 
-        private static void GenerateQuestionsFile(string filePath, int numberOfQuestions)
+        private void GenerateQuestionsFile(string filePath, int numberOfQuestions)
         {
             for (int i = 0; i < numberOfQuestions; i++)
             {
