@@ -6,5 +6,5 @@
 - [x] Issue 2: Unit test properly passes ✔❌
 
 ### Extra Credit
-- [ ] Issue 3: Feature request implemented ✔❌
-- [ ] Issue 3: Feature request unit tested ✔❌
+- [x] Issue 3: Feature request implemented ✔❌
+- [x] Issue 3: Feature request unit tested ✔❌
