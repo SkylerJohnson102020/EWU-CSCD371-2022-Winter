@@ -37,7 +37,7 @@ namespace PrincessBrideTrivia.Tests
                 Question[] questions1 = Program.LoadQuestions(filePath);
                 Question[] questions2 = Program.LoadQuestions(filePath);
 
-                Assert.AreNotEqual(questions1, questions2);
+                CollectionAssert.AreNotEqual(questions1, questions2);
             }
             finally
             {
