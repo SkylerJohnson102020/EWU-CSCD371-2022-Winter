@@ -27,7 +27,7 @@ namespace PrincessBrideTrivia.Tests
             }
         }
         [TestMethod]
-         public void LoadQuestions_GenerateQuestionsInRandomOrder_Success()
+        public void ShuffleQuestions_GenerateQuestionsInRandomOrder_Success()
         {
             string filePath = Path.GetRandomFileName();
             try
@@ -35,7 +35,7 @@ namespace PrincessBrideTrivia.Tests
                 GenerateQuestionsFile(filePath, 2);
 
                 Question[] questions1 = Program.LoadQuestions(filePath);
-                Question[] questions2 = Program.LoadQuestions(filePath);
+                Question[] questions2 = Program.ShuffleQuestions(questions1);
 
                 CollectionAssert.AreNotEqual(questions1, questions2);
             }
@@ -65,8 +65,6 @@ namespace PrincessBrideTrivia.Tests
         [TestMethod]
         public void GetFilePath_ReturnsFileThatExists()
         {
-            // Arrange
-
             // Act
             string filePath = Program.GetFilePath();
 
@@ -82,8 +80,6 @@ namespace PrincessBrideTrivia.Tests
         public void GetPercentCorrect_ReturnsExpectedPercentage(int numberOfCorrectGuesses, 
             int numberOfQuestions, string expectedString)
         {
-            // Arrange
-
             // Act
             string percentage = Program.GetPercentCorrect(numberOfCorrectGuesses, numberOfQuestions);
 
