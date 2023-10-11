@@ -26,25 +26,6 @@ namespace PrincessBrideTrivia.Tests
                 File.Delete(filePath);
             }
         }
-        [TestMethod]
-        public void ShuffleQuestions_GenerateQuestionsInRandomOrder_Success()
-        {
-            string filePath = Path.GetRandomFileName();
-            try
-            {
-                GenerateQuestionsFile(filePath, 2);
-
-                Question[] questions1 = Program.LoadQuestions(filePath);
-                Question[] questions2 = Program.ShuffleQuestions(questions1);
-
-                CollectionAssert.AreNotEqual(questions1, questions2);
-            }
-            finally
-            {
-                File.Delete(filePath);
-            }
-        }
-
 
         [TestMethod]
         [DataRow("1", true)]
@@ -87,6 +68,24 @@ namespace PrincessBrideTrivia.Tests
             Assert.AreEqual(expectedString, percentage);
         }
 
+        [TestMethod]
+        public void ShuffleQuestions_GenerateQuestionsInRandomOrder_Success()
+        {
+            string filePath = Path.GetRandomFileName();
+            try
+            {
+                GenerateQuestionsFile(filePath, 2);
+
+                Question[] questions1 = Program.LoadQuestions(filePath);
+                Question[] questions2 = Program.ShuffleQuestions(questions1);
+
+                CollectionAssert.AreNotEqual(questions1, questions2);
+            }
+            finally
+            {
+                File.Delete(filePath);
+            }
+        }
 
         private void GenerateQuestionsFile(string filePath, int numberOfQuestions)
         {
