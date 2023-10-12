@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 
 namespace PrincessBrideTrivia
 {
@@ -19,12 +20,13 @@ namespace PrincessBrideTrivia
                     numberCorrect++;
                 }
             }
-            Console.WriteLine("You got " + GetPercentCorrect(numberCorrect, questions.Length) + " correct");
+            Console.WriteLine($"You answered {GetPercentCorrect(numberCorrect, questions.Length)} of the questions correctly.");
         }
 
         public static string GetPercentCorrect(int numberCorrectAnswers, int numberOfQuestions)
         {
-            return (numberCorrectAnswers / numberOfQuestions * 100) + "%";
+            float percentCorrect = (float) numberCorrectAnswers / numberOfQuestions * 100;
+            return String.Format("{0:0}", percentCorrect) + "%";
         }
 
         public static bool AskQuestion(Question question)
@@ -66,6 +68,12 @@ namespace PrincessBrideTrivia
             return "Trivia.txt";
         }
 
+        public static Question[] ShuffleQuestions(Question[] questions)
+        {
+            Random random = new Random();
+            return questions.OrderBy(question => random.Next()).ToArray();
+        }
+
         public static Question[] LoadQuestions(string filePath)
         {
             string[] lines = File.ReadAllLines(filePath);
@@ -89,8 +97,9 @@ namespace PrincessBrideTrivia
                 question.Answers[1] = answer2;
                 question.Answers[2] = answer3;
                 question.CorrectAnswerIndex = correctAnswerIndex;
+                questions[i] = question;
             }
-            return questions;
+            return ShuffleQuestions(questions);
         }
     }
 }

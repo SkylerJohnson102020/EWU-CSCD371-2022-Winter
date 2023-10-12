@@ -71,7 +71,25 @@ namespace PrincessBrideTrivia.Tests
             // Assert
             Assert.AreEqual(expectedString, percentage);
         }
+        
+        [TestMethod]
+        public void ShuffleQuestions_GenerateQuestionsInRandomOrder_Success()
+        {
+            string filePath = Path.GetRandomFileName();
+            try
+            {
+                GenerateQuestionsFile(filePath, 7);
 
+                Question[] questions1 = Program.LoadQuestions(filePath);
+                Question[] questions2 = Program.ShuffleQuestions(questions1);
+
+                CollectionAssert.AreNotEqual(questions1, questions2);
+            }
+            finally
+            {
+                File.Delete(filePath);
+            }
+        }
 
         private static void GenerateQuestionsFile(string filePath, int numberOfQuestions)
         {
